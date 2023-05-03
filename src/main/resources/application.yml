@@ -1,0 +1,51 @@
+server:
+  port: 8081
+spring:
+  thymeleaf:
+    cache: false
+    prefix: classpath:/templates/
+    suffix: .html
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/rdav_database?useUnicode=true&characterEncoding=utf-8&allowMultiQueries=true&useSSL=false&serverTimezone=UTC
+    username: root
+    password: 123456
+    #    数据库连接池初始化连接数
+    initialSize: 1
+    #   数据库连接池最小闲置数
+    minIdle: 3
+    #数据库连接池最大活跃数
+    maxActive: 20
+    #数据库连接的最长等待时间ms
+    maxWait: 60000
+    timeBetweenEvictionRunsMillis: 60000
+    minEvictableIdleTimeMillis: 30000
+    validationQuery: select 'x'
+    testWhileIdle: true
+    testOnBorrow: false
+    testOnReturn: false
+    poolPreparedStatements: true
+    maxPoolPreparedStatementPerConnectionSize: 20
+
+  mybatis:
+    # dao包
+    type-aliases-package:  person.xlj.boke.mapper.ArticleMapper
+    # sql语句文件所在路径
+    mapper-locations: classpath:mapper/**/*Mapper.xml
+    configLocation: classpath:mybatis/mybatis-config.xml
+    configuration:
+      mapUnderscoreToCamelCase: true
+
+  #redis连接配置
+  redis:
+    host: localhost
+    port: 6379
+    database: 15
+    timeout: 10000
+
+    lettuce:
+      pool:
+        max-idle: 30
+        max-active: 8
+        max-wait: 10000
+        max-total: 10000
